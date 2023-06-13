@@ -1,9 +1,10 @@
 import { ThemeProvider } from 'styled-components';
 import theme from './ui/theme';
+import Button from './components/Button';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <div>Hello</div>
+    <Button text="Hello" />
   </ThemeProvider>
 );
 
