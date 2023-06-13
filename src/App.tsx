@@ -1,10 +1,11 @@
 import { ThemeProvider } from 'styled-components';
 import theme from './ui/theme';
-import Button from './components/Button';
+import { RouterProvider } from 'react-router-dom';
+import router from './routing';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <Button text="Hello" />
+    <RouterProvider router={router} />
   </ThemeProvider>
 );
 
