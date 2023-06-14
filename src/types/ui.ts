@@ -1,4 +1,4 @@
-export type Color = 'primary' | 'secondary' | 'tertiary' | 'white';
+export type Color = 'primary' | 'secondary' | 'tertiary' | 'white' | 'grey';
 
 export type Typegraphy = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'base';
 

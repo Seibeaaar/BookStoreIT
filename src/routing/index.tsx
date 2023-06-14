@@ -1,5 +1,6 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Header from 'src/components/Header';
+import NotFoundPage from 'src/pages/404';
 
 const Layout = () => (
   <>
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
         path: '/contact',
       },
       {
-        element: <div>Not Found</div>,
+        element: <NotFoundPage />,
         path: '*',
       },
     ],

@@ -14,7 +14,7 @@ const Text = styled.p<ITextProps>`
   line-height: ${(props) =>
     props.theme.typography[props.size || 'base'] * 1.3}px;
   font-weight: ${(props) => props.weight || 'inherit'};
-  font-family: ${(props) => props.family || 'inherit'};
+  font-family: ${(props) => props.family || ''};
 `;
 
 export default Text;
