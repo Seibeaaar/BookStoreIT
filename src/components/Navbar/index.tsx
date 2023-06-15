@@ -1,6 +1,7 @@
 import Text from '../ui/Text';
 import Flex from '../ui/Flex';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ReactComponent as CartIcon } from 'src/assets/icons/Cart.svg';
 import {
   NavLink,
@@ -10,6 +11,7 @@ import {
   NavbarDrawer,
 } from './Navbar.styled';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
+import { AppStore } from 'src/types/redux';
 
 const NAV_LINKS = [
   {
@@ -33,9 +35,11 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { width } = useWindowDimensions();
+  const { items } = useSelector((state: AppStore) => state.cart);
 
   const closeNavbarDrawer = () => setNavbarOpen(false);
   const toggleNavbarDrawer = () => setNavbarOpen(!navbarOpen);
+  const itemsCount = items.length;
 
   if (width < 768) {
     return (
@@ -80,9 +84,11 @@ const Navbar = () => {
       ))}
       <Cart>
         <CartIcon />
-        <CartLabel>
-          <span>1</span>
-        </CartLabel>
+        {itemsCount ? (
+          <CartLabel>
+            <span>{itemsCount}</span>
+          </CartLabel>
+        ) : null}
       </Cart>
     </Flex>
   );
