@@ -17,3 +17,7 @@ h6 {
   font-family: 'Cardo', serif;
   font-weight: 700;
 }
+
+a {
+  text-decoration: none;
+}

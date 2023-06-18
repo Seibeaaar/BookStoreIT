@@ -5,7 +5,8 @@ type FlexAlignment =
   | 'flex-end'
   | 'center'
   | 'space-between'
-  | 'space-around';
+  | 'space-around'
+  | 'stretch';
 
 interface IFlexProps {
   column?: boolean;

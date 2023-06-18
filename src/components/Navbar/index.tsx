@@ -11,26 +11,8 @@ import {
   NavbarDrawer,
 } from './Navbar.styled';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
+import { NAV_LINKS } from 'src/constants/nav';
 import { AppStore } from 'src/types/redux';
-
-const NAV_LINKS = [
-  {
-    path: '/',
-    name: 'Home',
-  },
-  {
-    path: '/shop',
-    name: 'Shop',
-  },
-  {
-    path: '/about',
-    name: 'About',
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-  },
-];
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -41,7 +23,7 @@ const Navbar = () => {
   const toggleNavbarDrawer = () => setNavbarOpen(!navbarOpen);
   const itemsCount = items.length;
 
-  if (width < 768) {
+  if (width < 1024) {
     return (
       <Flex
         justifyContent="space-between"
@@ -51,9 +33,11 @@ const Navbar = () => {
       >
         <Cart>
           <CartIcon />
-          <CartLabel>
-            <span>1</span>
-          </CartLabel>
+          {itemsCount ? (
+            <CartLabel>
+              <span>{itemsCount}</span>
+            </CartLabel>
+          ) : null}
         </Cart>
         <NavbarMenu open={navbarOpen} onClick={toggleNavbarDrawer}>
           <div></div>
@@ -74,7 +58,7 @@ const Navbar = () => {
   }
 
   return (
-    <Flex justifyContent="space-between" alignItems="center" gap={20} as="nav">
+    <Flex justifyContent="space-between" alignItems="center" gap={64} as="nav">
       {NAV_LINKS.map((link) => (
         <NavLink key={link.path} to={link.path}>
           <Text weight="300" color="white">

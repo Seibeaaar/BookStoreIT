@@ -1,11 +1,14 @@
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 import Header from 'src/components/Header';
+import HomePage from 'src/pages/Home';
+import Footer from 'src/components/Footer';
 import NotFoundPage from 'src/pages/404';
 
 const Layout = () => (
   <>
     <Header />
     <Outlet />
+    <Footer />
   </>
 );
 
@@ -14,7 +17,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        element: <div>Home</div>,
+        element: <HomePage />,
         path: '/',
       },
       {

@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import Text from './Text';
 import React from 'react';
+import { Color } from 'src/types/ui';
 
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   background?: boolean;
   text: string;
   width?: number;
+  textColor?: Color;
 }
 
 const ButtonTemplate = styled.button<IButtonProps>`
@@ -21,14 +23,15 @@ const ButtonTemplate = styled.button<IButtonProps>`
 const PrimaryButton = styled(ButtonTemplate)`
   background-color: ${(props) => props.theme.colors.secondary};
   &:hover {
-    opacity: 0.85;
+    background-color: transparent;
   }
 `;
 
 const BorderedButton = styled(ButtonTemplate)`
   background-color: transparent;
   &:hover {
-    background-color: ${(props) => props.theme.colors.tertiary};
+    border-color: transparent;
+    background-color: ${(props) => props.theme.colors.grey};
   }
 `;
 
@@ -37,7 +40,7 @@ const Button: React.FC<IButtonProps> = (props) => {
   const RenderedButton = background ? PrimaryButton : BorderedButton;
   return (
     <RenderedButton {...props}>
-      <Text weight="700" family="Cardo">
+      <Text weight="300" family="Cardo" color={props.textColor}>
         {props.text}
       </Text>
     </RenderedButton>

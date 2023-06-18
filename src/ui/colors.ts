@@ -4,4 +4,5 @@ export default {
   tertiary: '#F6F8FC',
   white: '#FFF',
   grey: '#969AA0',
+  section: '#F4F8FF',
 };
