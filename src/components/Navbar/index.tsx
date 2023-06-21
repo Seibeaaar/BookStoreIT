@@ -13,17 +13,19 @@ import {
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
 import { NAV_LINKS } from 'src/constants/nav';
 import { AppStore } from 'src/types/redux';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const { width } = useWindowDimensions();
+  const { large } = useWindowDimensions();
   const { items } = useSelector((state: AppStore) => state.cart);
 
   const closeNavbarDrawer = () => setNavbarOpen(false);
   const toggleNavbarDrawer = () => setNavbarOpen(!navbarOpen);
   const itemsCount = items.length;
+  const { pathname } = useLocation();
 
-  if (width < 1024) {
+  if (large) {
     return (
       <Flex
         justifyContent="space-between"
@@ -46,8 +48,13 @@ const Navbar = () => {
         </NavbarMenu>
         <NavbarDrawer open={navbarOpen} column alignItems="center">
           {NAV_LINKS.map((link) => (
-            <NavLink onClick={closeNavbarDrawer} key={link.path} to={link.path}>
-              <Text weight="300" color="white">
+            <NavLink
+              active={pathname === link.path}
+              onClick={closeNavbarDrawer}
+              key={link.path}
+              to={link.path}
+            >
+              <Text size="h4" weight="300" color="white">
                 {link.name}
               </Text>
             </NavLink>

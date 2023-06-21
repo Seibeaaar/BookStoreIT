@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Flex from '../ui/Flex';
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(Link)<{ active?: boolean }>`
   text-decoration: none;
   position: relative;
   &::after {
@@ -10,7 +10,7 @@ export const NavLink = styled(Link)`
     position: absolute;
     bottom: -2px;
     left: 0;
-    transform: scaleX(0);
+    transform: ${(props) => `scaleX(${props.active ? 1 : 0})`};
     transition: all ease 0.25s;
     transform-origin: left;
     background-color: ${(props) => props.theme.colors.white};
