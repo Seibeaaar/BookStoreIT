@@ -5,10 +5,14 @@ import Text from 'src/components/ui/Text';
 import AboutImage from 'src/assets/images/about.webp';
 import { Tick } from '../components/Home.styled';
 import FloatingImage from '../components/FloatedImage';
+import useWindowDimensions from 'src/hooks/useWindowDimensions';
 
 const Container = styled.section`
   background-color: ${(props) => props.theme.colors.section};
   padding: 150px 0;
+  @media screen and (max-width: 768px) {
+    padding: 75px 0;
+  }
 `;
 
 const AboutText = styled(Text)`
@@ -17,19 +21,35 @@ const AboutText = styled(Text)`
 
 const AboutInfo = styled.article`
   max-width: 500px;
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const AboutShop = () => {
+  const { width } = useWindowDimensions();
+  const mediumSizeScreen = width <= 768;
   return (
     <Container>
       <ContentBox>
-        <Flex justifyContent="center" gap={70}>
+        <Flex
+          column={mediumSizeScreen}
+          reverse={mediumSizeScreen}
+          justifyContent="center"
+          alignItems={mediumSizeScreen ? 'center' : 'flex-start'}
+          gap={70}
+        >
           <FloatingImage image={AboutImage} alt="Man reading a book" />
           <AboutInfo>
-            <Text weight="700" size="h4" as="h4">
-              About us
-            </Text>
-            <Tick />
+            <Flex
+              column
+              alignItems={mediumSizeScreen ? 'center' : 'flex-start'}
+            >
+              <Text weight="700" size="h4" as="h4">
+                About us
+              </Text>
+              <Tick />
+            </Flex>
             <AboutText color="grey" weight="300">
               Welcome to our online book shop! We are dedicated to bringing you
               a wide selection of books across genres. With our user-friendly

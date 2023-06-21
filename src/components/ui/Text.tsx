@@ -6,6 +6,7 @@ interface ITextProps {
   color?: Color;
   weight?: FontWeight;
   family?: FontFamily;
+  center?: boolean;
 }
 
 const Text = styled.p<ITextProps>`
@@ -15,6 +16,7 @@ const Text = styled.p<ITextProps>`
     props.theme.typography[props.size || 'base'] * 1.3}px;
   font-weight: ${(props) => props.weight || 'inherit'};
   font-family: ${(props) => props.family || ''};
+  text-align: ${(props) => (props.center ? 'center' : 'start')};
 `;
 
 export default Text;

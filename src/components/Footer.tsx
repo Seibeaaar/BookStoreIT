@@ -6,6 +6,7 @@ import { ReactComponent as ThreeDots } from 'src/assets/icons/ThreeDots.svg';
 import { SOCIAL_LINKS, NAV_LINKS } from 'src/constants/nav';
 import Text from './ui/Text';
 import Flex from './ui/Flex';
+import useWindowDimensions from 'src/hooks/useWindowDimensions';
 
 const Container = styled.footer`
   background-color: ${(props) => props.theme.colors.primary};
@@ -39,6 +40,9 @@ const SocialLink = styled.a`
 
 const ContactInfo = styled.article`
   max-width: 30%;
+  @media screen and (max-width: 1064px) {
+    max-width: 100%;
+  }
 `;
 
 const ExploreLinkText = styled(Text)`
@@ -48,16 +52,32 @@ const ExploreLinkText = styled(Text)`
   }
 `;
 
+const InfoTitle = styled(Text)`
+  width: 76px;
+  margin-right: 14px;
+`;
+
 const Footer = () => {
+  const { width } = useWindowDimensions();
+  const tabletScreenSize = width <= 1064;
+  const smallScreenSize = width <= 576;
   return (
     <Container>
       <ContentBox>
         <FooterContent
           as="section"
-          alignItems="center"
+          alignItems={tabletScreenSize ? 'flex-start' : 'center'}
           justifyContent="space-between"
+          column={tabletScreenSize}
+          gap={tabletScreenSize ? 48 : 0}
         >
-          <Flex gap={100} as="article">
+          <Flex
+            gap={smallScreenSize ? 40 : 100}
+            as="article"
+            width={tabletScreenSize ? '100%' : 'auto'}
+            column={smallScreenSize}
+            justifyContent={tabletScreenSize ? 'space-between' : 'flex-start'}
+          >
             <div>
               <Flex alignItems="center" gap={12}>
                 <Logo />
@@ -100,25 +120,27 @@ const Footer = () => {
             <SectionHeader size="h6" family="Cardo" weight="700" color="white">
               Keep in touch
             </SectionHeader>
-            <Flex gap={14}>
-              <Flex column gap={15}>
-                <Text color="white" weight="700" family="Cardo">
+            <Flex gap={14} column>
+              <Flex>
+                <InfoTitle color="white" weight="700" family="Cardo">
                   Address:
-                </Text>
-                <Text color="white" weight="700" family="Cardo">
-                  Mail:
-                </Text>
-                <Text color="white" weight="700" family="Cardo">
-                  Phone:
-                </Text>
-              </Flex>
-              <Flex column gap={15}>
+                </InfoTitle>
                 <Text color="grey">
                   24A Kingston St, Las Vegas NC 28202, USA.
                 </Text>
+              </Flex>
+              <Flex>
+                <InfoTitle color="white" weight="700" family="Cardo">
+                  Mail:
+                </InfoTitle>
                 <a href="mailto:support@bookstoreit.com">
                   <Text color="grey">support@bookstoreit.com</Text>
                 </a>
+              </Flex>
+              <Flex>
+                <InfoTitle color="white" weight="700" family="Cardo">
+                  Phone:
+                </InfoTitle>
                 <a href="tel:(+22) 123 - 4567 - 900">
                   <Text color="grey">(+22) 123 - 4567 - 900</Text>
                 </a>

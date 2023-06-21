@@ -7,6 +7,7 @@ import Text from 'src/components/ui/Text';
 import ContentBox from 'src/components/ui/ContentBox';
 import styled from 'styled-components';
 import { Tick } from '../components/Home.styled';
+import useWindowDimensions from 'src/hooks/useWindowDimensions';
 
 interface IBookDemoProps {
   books: BookPreview[];
@@ -14,10 +15,20 @@ interface IBookDemoProps {
 
 const Container = styled.section`
   padding: 140px 0;
+  @media screen and (max-width: 768px) {
+    padding: 70px 0;
+  }
 `;
 
 const BookItem = styled(Flex)`
   flex-basis: 50%;
+  @media screen and (max-width: 1200px) {
+    flex-basis: 100%;
+  }
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const BooksSection = styled(Flex)`
@@ -35,9 +46,9 @@ const BookImage = styled.img`
 
 const BooksDemo: React.FC<IBookDemoProps> = ({ books }) => {
   const navigate = useNavigate();
-
+  const { width } = useWindowDimensions();
   const navigateToShop = () => navigate('/shop');
-
+  const smallScreenSize = width <= 576;
   return (
     <Container>
       <ContentBox>
@@ -51,15 +62,22 @@ const BooksDemo: React.FC<IBookDemoProps> = ({ books }) => {
           {books.map((book) => (
             <BookItem key={book.isbn13} alignItems="center">
               <BookImage src={book.image} alt={book.title} />
-              <div>
+              <Flex
+                column
+                alignItems={smallScreenSize ? 'center' : 'flex-start'}
+              >
                 <Text size="h5" as="h5" weight="700">
                   {book.title}
                 </Text>
-                <BookDescription color="grey" weight="300">
+                <BookDescription
+                  center={smallScreenSize}
+                  color="grey"
+                  weight="300"
+                >
                   {book.subtitle}
                 </BookDescription>
                 <Button width={150} text="Read more" background={false} />
-              </div>
+              </Flex>
             </BookItem>
           ))}
         </BooksSection>
