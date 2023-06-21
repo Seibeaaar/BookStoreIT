@@ -27,24 +27,20 @@ const AboutInfo = styled.article`
 `;
 
 const AboutShop = () => {
-  const { width } = useWindowDimensions();
-  const mediumSizeScreen = width <= 768;
+  const { medium } = useWindowDimensions();
   return (
     <Container>
       <ContentBox>
         <Flex
-          column={mediumSizeScreen}
-          reverse={mediumSizeScreen}
+          column={medium}
+          reverse={medium}
           justifyContent="center"
-          alignItems={mediumSizeScreen ? 'center' : 'flex-start'}
+          alignItems={medium ? 'center' : 'flex-start'}
           gap={70}
         >
           <FloatingImage image={AboutImage} alt="Man reading a book" />
           <AboutInfo>
-            <Flex
-              column
-              alignItems={mediumSizeScreen ? 'center' : 'flex-start'}
-            >
+            <Flex column alignItems={medium ? 'center' : 'flex-start'}>
               <Text weight="700" size="h4" as="h4">
                 About us
               </Text>

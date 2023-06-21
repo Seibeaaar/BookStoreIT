@@ -58,25 +58,23 @@ const InfoTitle = styled(Text)`
 `;
 
 const Footer = () => {
-  const { width } = useWindowDimensions();
-  const tabletScreenSize = width <= 1064;
-  const smallScreenSize = width <= 576;
+  const { large, small } = useWindowDimensions();
   return (
     <Container>
       <ContentBox>
         <FooterContent
           as="section"
-          alignItems={tabletScreenSize ? 'flex-start' : 'center'}
+          alignItems={large ? 'flex-start' : 'center'}
           justifyContent="space-between"
-          column={tabletScreenSize}
-          gap={tabletScreenSize ? 48 : 0}
+          column={large}
+          gap={large ? 48 : 0}
         >
           <Flex
-            gap={smallScreenSize ? 40 : 100}
+            gap={small ? 40 : 100}
             as="article"
-            width={tabletScreenSize ? '100%' : 'auto'}
-            column={smallScreenSize}
-            justifyContent={tabletScreenSize ? 'space-between' : 'flex-start'}
+            width={large ? '100%' : 'auto'}
+            column={small}
+            justifyContent={large ? 'space-between' : 'flex-start'}
           >
             <div>
               <Flex alignItems="center" gap={12}>

@@ -13,7 +13,16 @@ const useWindowDimensions = () => {
     return () => window.removeEventListener('resize', resizeListener);
   }, []);
 
-  return { width, height };
+  return {
+    width,
+    height,
+    // Those values are inspired by bootstrap docs
+    small: width <= 576,
+    medium: width <= 768,
+    large: width <= 1064,
+    extraLarge: width <= 1200,
+    extraExtraLarge: width > 1200,
+  };
 };
 
 export default useWindowDimensions;

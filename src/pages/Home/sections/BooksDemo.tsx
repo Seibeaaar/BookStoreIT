@@ -46,9 +46,8 @@ const BookImage = styled.img`
 
 const BooksDemo: React.FC<IBookDemoProps> = ({ books }) => {
   const navigate = useNavigate();
-  const { width } = useWindowDimensions();
+  const { small } = useWindowDimensions();
   const navigateToShop = () => navigate('/shop');
-  const smallScreenSize = width <= 576;
   return (
     <Container>
       <ContentBox>
@@ -62,18 +61,11 @@ const BooksDemo: React.FC<IBookDemoProps> = ({ books }) => {
           {books.map((book) => (
             <BookItem key={book.isbn13} alignItems="center">
               <BookImage src={book.image} alt={book.title} />
-              <Flex
-                column
-                alignItems={smallScreenSize ? 'center' : 'flex-start'}
-              >
+              <Flex column alignItems={small ? 'center' : 'flex-start'}>
                 <Text size="h5" as="h5" weight="700">
                   {book.title}
                 </Text>
-                <BookDescription
-                  center={smallScreenSize}
-                  color="grey"
-                  weight="300"
-                >
+                <BookDescription center={small} color="grey" weight="300">
                   {book.subtitle}
                 </BookDescription>
                 <Button width={150} text="Read more" background={false} />

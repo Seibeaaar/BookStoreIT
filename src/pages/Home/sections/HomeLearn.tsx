@@ -43,20 +43,19 @@ const HomeLearn = () => {
   const { learnBullets } = useSelector(
     (state: AppStore) => state.content.homeContent as HomeContent
   );
-  const { width } = useWindowDimensions();
-  const smallSizeScreen = width <= 576;
+  const { small, extraExtraLarge } = useWindowDimensions();
   return (
     <Container>
       <ContentBox>
         <Flex gap={22} column alignItems="center" justifyContent="center">
-          <Text center={smallSizeScreen} weight="700" size="h3" as="h3">
+          <Text center={small} weight="700" size="h3" as="h3">
             What will you learn
           </Text>
           <Tick />
         </Flex>
         <LearnContent alignItems="center" gap={100}>
           <LearnBullets
-            column={smallSizeScreen}
+            column={small}
             gap={30}
             justifyContent="space-between"
             alignItems="stretch"
@@ -64,7 +63,7 @@ const HomeLearn = () => {
             {learnBullets.map((lb, i) => (
               <LearnItem
                 column
-                alignItems={smallSizeScreen ? 'center' : 'flex-start'}
+                alignItems={small ? 'center' : 'flex-start'}
                 key={lb}
               >
                 <Bullet justifyContent="center" alignItems="center">
@@ -72,13 +71,13 @@ const HomeLearn = () => {
                     {i + 1}
                   </Text>
                 </Bullet>
-                <Text center={smallSizeScreen} family="Cardo" weight="700">
+                <Text center={small} family="Cardo" weight="700">
                   {lb}
                 </Text>
               </LearnItem>
             ))}
           </LearnBullets>
-          {width > 1200 ? (
+          {extraExtraLarge ? (
             <FloatingImage image={LearnImage} alt="Lady with a book" />
           ) : null}
         </LearnContent>

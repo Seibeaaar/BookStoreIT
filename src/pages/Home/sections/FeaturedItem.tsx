@@ -53,9 +53,7 @@ const BookTitle = styled(Text)`
 
 const FeaturedItem = () => {
   const featuredBook = useSelector((state: AppStore) => state.books.feed[0]);
-  const { width } = useWindowDimensions();
-  const mediumScreenSize = width <= 768;
-  const smallScreenSize = width <= 576;
+  const { medium, small } = useWindowDimensions();
   return (
     <Container>
       <ContentBox>
@@ -66,18 +64,13 @@ const FeaturedItem = () => {
           </Text>
         </Flex>
         <Flex
-          column={mediumScreenSize}
-          reverse={mediumScreenSize}
+          column={medium}
+          reverse={medium}
           alignItems="center"
           justifyContent="space-between"
         >
           <Flex column justifyContent="center">
-            <BookTitle
-              center={mediumScreenSize}
-              as="h1"
-              size="h1"
-              color="white"
-            >
+            <BookTitle center={medium} as="h1" size="h1" color="white">
               {featuredBook.title}
             </BookTitle>
             <Text color="grey">{featuredBook.subtitle}</Text>
@@ -85,9 +78,9 @@ const FeaturedItem = () => {
           <FeaturedImage alt="Featured book" src={featuredBook.image} />
         </Flex>
         <Flex
-          column={smallScreenSize}
+          column={small}
           alignItems="center"
-          justifyContent={mediumScreenSize ? 'center' : 'flex-start'}
+          justifyContent={medium ? 'center' : 'flex-start'}
           gap={40}
         >
           <Button text="Add to your cart" />

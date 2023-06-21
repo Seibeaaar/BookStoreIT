@@ -34,40 +34,28 @@ const Image = styled.img`
 const HomeOffer = () => {
   const navigate = useNavigate();
   const navigateToShop = () => navigate('/shop');
-  const { width } = useWindowDimensions();
-  const mediumSizeScreen = width <= 768;
-  const smallScreenSize = width <= 576;
+  const { medium, small } = useWindowDimensions();
 
   return (
     <Container>
       <ContentBox>
         <Flex
-          column={mediumSizeScreen}
+          column={medium}
           alignItems="center"
           justifyContent="space-between"
         >
           <OfferContent>
-            <Flex
-              column
-              alignItems={mediumSizeScreen ? 'center' : 'flex-start'}
-              gap={12}
-            >
-              <Text
-                center={smallScreenSize}
-                as="h4"
-                size="h4"
-                color="white"
-                weight="700"
-              >
+            <Flex column alignItems={medium ? 'center' : 'flex-start'} gap={12}>
+              <Text center={small} as="h4" size="h4" color="white" weight="700">
                 Get original books today
               </Text>
               <Tick />
             </Flex>
-            <OfferText center={mediumSizeScreen} weight="300" color="grey">
+            <OfferText center={medium} weight="300" color="grey">
               Find more than 200 books on our website and boost your software
               development skills
             </OfferText>
-            <Flex justifyContent={mediumSizeScreen ? 'center' : 'flex-start'}>
+            <Flex justifyContent={medium ? 'center' : 'flex-start'}>
               <Button
                 textColor="white"
                 background={false}
