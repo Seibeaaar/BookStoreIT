@@ -8,6 +8,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   text: string;
   width?: number;
   textColor?: Color;
+  hoverTextColor?: Color;
 }
 
 const ButtonTemplate = styled.button<IButtonProps>`
@@ -20,6 +21,15 @@ const ButtonTemplate = styled.button<IButtonProps>`
     if (typeof props.width === 'string') return props.width;
     return `${props.width || 220}px`;
   }};
+  p {
+    transition: color 0.25s ease;
+  }
+  &:hover {
+    p {
+      color: ${(props) =>
+        props.theme.colors[props.hoverTextColor || 'primary']};
+    }
+  }
 `;
 
 const PrimaryButton = styled(ButtonTemplate)`
@@ -33,7 +43,7 @@ const BorderedButton = styled(ButtonTemplate)`
   background-color: transparent;
   &:hover {
     border-color: transparent;
-    background-color: ${(props) => props.theme.colors.grey};
+    background-color: ${(props) => props.theme.colors.secondary};
   }
 `;
 

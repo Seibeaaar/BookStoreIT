@@ -6,6 +6,9 @@ export const FeaturedContainer = styled.section`
   background-color: ${(props) => props.theme.colors.primary};
   padding: 60px 0 120px 0;
   height: 50vh;
+  @media screen and (max-width: 992px) {
+    height: auto;
+  }
 `;
 
 export const FeaturedContent = styled.div`
@@ -22,6 +25,9 @@ export const Tick = styled.div`
 
 export const BooksSection = styled.section`
   padding: 150px 0;
+  @media screen and (max-width: 768px) {
+    padding: 75px 0;
+  }
 `;
 
 export const CategorySelector = styled(Text)<{ active: boolean }>`

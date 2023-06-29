@@ -83,7 +83,7 @@ const FeaturedItem = () => {
           justifyContent={medium ? 'center' : 'flex-start'}
           gap={40}
         >
-          <Button text="Add to your cart" />
+          <Button hoverTextColor="white" text="Add to your cart" />
           <WebPageLink href={featuredBook.url} target="_blank">
             <Text family="Cardo" weight="400" color="white">
               Read more on website

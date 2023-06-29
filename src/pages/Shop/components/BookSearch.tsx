@@ -14,6 +14,15 @@ const SearchContainer = styled.div`
   background-color: ${(props) => props.theme.colors.tertiary};
   position: relative;
   height: 48px;
+  @media screen and (max-width: 1200px) {
+    width: 50vw;
+  }
+  @media screen and (max-width: 768px) {
+    width: 75vw;
+  }
+  @media screen and (max-width: 576px) {
+    width: auto;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -38,19 +47,11 @@ const SearchButton = styled.button<{ disabled: boolean }>`
   right: 4px;
   border-radius: 50%;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  transition: background-color 0.25s ease;
+  transition: opacity 0.25s ease;
   background-color: ${(props) =>
     props.theme.colors[props.disabled ? 'grey' : 'secondary']};
-  * > svg {
-    transition: color 0.25s ease;
-  }
   &:hover {
-    background-color: ${(props) =>
-      props.theme.colors[props.disabled ? 'grey' : 'primary']};
-    * > svg {
-      color: ${(props) =>
-        props.theme.colors[props.disabled ? 'secondary' : 'white']};
-    }
+    opacity: 0.75;
   }
 `;
 

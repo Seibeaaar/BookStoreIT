@@ -27,6 +27,9 @@ const BookDescription = styled(Text)`
 const BookImage = styled.img`
   max-width: 400px;
   margin-right: 20px;
+  @media screen and (max-width: 576px) {
+    margin: 0;
+  }
 `;
 
 const BookItem: React.FC<IBookItemProps> = ({ book }) => {
@@ -35,7 +38,7 @@ const BookItem: React.FC<IBookItemProps> = ({ book }) => {
     <BookItemContainer key={book.isbn13} alignItems="center">
       <BookImage loading="lazy" src={book.image} alt={book.title} />
       <Flex column alignItems={small ? 'center' : 'flex-start'}>
-        <Text size="h5" as="h5" weight="700">
+        <Text center={small} size="h5" as="h5" weight="700">
           {book.title}
         </Text>
         <BookDescription center={small} color="grey" weight="300">

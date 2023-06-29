@@ -87,4 +87,5 @@ export const NavbarDrawer = styled(Flex)<{ open: boolean }>`
   background-color: ${(props) => props.theme.colors.primary};
   transition: height 0.25s ease;
   overflow: hidden;
+  z-index: 1;
 `;

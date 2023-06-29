@@ -18,7 +18,7 @@ const SearchPagination = () => {
   );
   const itemsToRender = calculateSearchPages(totalResults);
   const dispatch = useDispatch<AppDispatch>();
-  const { height } = useWindowDimensions();
+  const { height, small } = useWindowDimensions();
 
   const searchSpecificPage = (page: number) => {
     scrollTo(0, height * 0.65);
@@ -34,14 +34,14 @@ const SearchPagination = () => {
 
   const DynamicPaginationItems = () => {
     const pagesPatch = Array.from({
-      length: 4,
+      length: small ? 2 : 4,
     }).map((_, i) => {
       switch (true) {
         // We orient on a difference by 5 since on the edges
         // we want to render exactly 5 items
         case currentPage > itemsToRender - 5:
           return itemsToRender - 4 + i;
-        case currentPage > 5:
+        case currentPage > (small ? 3 : 5):
           return i + currentPage;
         default:
           // +2 is used since the first page is present by default
@@ -51,7 +51,7 @@ const SearchPagination = () => {
     const [min, max] = [pagesPatch[0], pagesPatch[pagesPatch.length - 1]];
     return (
       <>
-        {currentPage > 5 ? (
+        {currentPage > (small ? 3 : 5) ? (
           <PaginationItem
             active={false}
             onClick={() => searchSpecificPage(min - 1)}
@@ -97,9 +97,11 @@ const SearchPagination = () => {
   return (
     <Flex alignItems="center" gap={48} justifyContent="center">
       <Flex justifyContent="center" alignItems="center" gap={24}>
-        <PaginationControl disabled={firstPage} onClick={moveToPrevious}>
-          <ChveronLeft width={24} height={24} />
-        </PaginationControl>
+        {small ? null : (
+          <PaginationControl disabled={firstPage} onClick={moveToPrevious}>
+            <ChveronLeft width={24} height={24} />
+          </PaginationControl>
+        )}
         <Flex alignItems="center" justifyContent="center" gap={12}>
           <PaginationItem
             onClick={() => searchSpecificPage(1)}
@@ -115,9 +117,11 @@ const SearchPagination = () => {
             <Text>{itemsToRender}</Text>
           </PaginationItem>
         </Flex>
-        <PaginationControl disabled={lastPage} onClick={moveToNext}>
-          <ChveronRight width={24} height={24} />
-        </PaginationControl>
+        {small ? null : (
+          <PaginationControl disabled={lastPage} onClick={moveToNext}>
+            <ChveronRight width={24} height={24} />
+          </PaginationControl>
+        )}
       </Flex>
     </Flex>
   );
