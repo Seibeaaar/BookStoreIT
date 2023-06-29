@@ -12,7 +12,15 @@ export interface BookReducer {
   pending: boolean;
   singleBook: Book | null;
   feed: BookPreview[];
-  searchResults: BookPreview[];
+}
+
+export interface SearchReducer {
+  error: string | null;
+  pending: boolean;
+  searchKeyword: string;
+  items: BookPreview[];
+  initial: boolean;
+  totalResults: number;
 }
 
 export interface ContentReducer {
@@ -25,4 +33,5 @@ export interface AppStore {
   books: BookReducer;
   cart: CartReducer;
   content: ContentReducer;
+  search: SearchReducer;
 }

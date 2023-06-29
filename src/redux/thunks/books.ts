@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import BooksAPI from 'src/api/books';
+import { SearchRequest } from 'src/types/search';
 
 export const getSingleBook = createAsyncThunk(
   'books/single',
@@ -25,11 +26,11 @@ export const getNewBooks = createAsyncThunk(
   }
 );
 
-export const seachBooksByKeyword = createAsyncThunk(
+export const searchBooksByKeyword = createAsyncThunk(
   'books/search',
-  async (keyword: string, { rejectWithValue }) => {
+  async ({ keyword, page }: SearchRequest, { rejectWithValue }) => {
     try {
-      const results = await BooksAPI.searchByKeyword(keyword);
+      const results = await BooksAPI.searchByKeyword(keyword, page);
       return results;
     } catch (e: any) {
       rejectWithValue(e.message);

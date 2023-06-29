@@ -7,7 +7,7 @@ import Text from 'src/components/ui/Text';
 import ContentBox from 'src/components/ui/ContentBox';
 import styled from 'styled-components';
 import { Tick } from '../components/Home.styled';
-import useWindowDimensions from 'src/hooks/useWindowDimensions';
+import BookItem from 'src/components/BookItem';
 
 interface IBookDemoProps {
   books: BookPreview[];
@@ -20,33 +20,13 @@ const Container = styled.section`
   }
 `;
 
-const BookItem = styled(Flex)`
-  flex-basis: 50%;
-  @media screen and (max-width: 1200px) {
-    flex-basis: 100%;
-  }
-  @media screen and (max-width: 576px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
 const BooksSection = styled(Flex)`
   margin: 60px 0;
   flex-wrap: wrap;
 `;
 
-const BookDescription = styled(Text)`
-  margin: 14px 0 30px 0;
-`;
-
-const BookImage = styled.img`
-  max-width: 400px;
-`;
-
 const BooksDemo: React.FC<IBookDemoProps> = ({ books }) => {
   const navigate = useNavigate();
-  const { small } = useWindowDimensions();
   const navigateToShop = () => navigate('/shop');
   return (
     <Container>
@@ -59,18 +39,7 @@ const BooksDemo: React.FC<IBookDemoProps> = ({ books }) => {
         </Flex>
         <BooksSection justifyContent="space-between" alignItems="stretch">
           {books.map((book) => (
-            <BookItem key={book.isbn13} alignItems="center">
-              <BookImage src={book.image} alt={book.title} />
-              <Flex column alignItems={small ? 'center' : 'flex-start'}>
-                <Text size="h5" as="h5" weight="700">
-                  {book.title}
-                </Text>
-                <BookDescription center={small} color="grey" weight="300">
-                  {book.subtitle}
-                </BookDescription>
-                <Button width={150} text="Read more" background={false} />
-              </Flex>
-            </BookItem>
+            <BookItem key={book.isbn13} book={book} />
           ))}
         </BooksSection>
         <Flex justifyContent="center">

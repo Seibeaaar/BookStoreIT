@@ -6,16 +6,19 @@ import storage from 'redux-persist/lib/storage';
 import bookReducer from './slices/books';
 import cartReducer from './slices/cart';
 import contentReducer from './slices/content';
+import searchReducer from './slices/search';
 
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['search', 'books'],
 };
 
 const rootReducer = combineReducers({
   books: bookReducer,
   cart: cartReducer,
   content: contentReducer,
+  search: searchReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
