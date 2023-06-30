@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react';
 import Flex from 'src/components/ui/Flex';
-import Text from 'src/components/ui/Text';
 import ContentBox from 'src/components/ui/ContentBox';
 
-import {
-  Tick,
-  FeaturedContainer,
-  FeaturedContent,
-  BooksSection,
-  CategorySelector,
-  ToTheTop,
-} from './Shop.styled';
+import { BooksSection, CategorySelector, ToTheTop } from './Shop.styled';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
 import { ReactComponent as ChveronUp } from 'src/assets/icons/ChevronUp.svg';
 import NewTab from './components/NewTab';
 import SearchTab from './components/SearchTab';
+import ShopHeader from 'src/components/ShopHeader';
 
 type StoreCategory = 'new' | 'search';
 
@@ -62,20 +55,7 @@ const ShopPage = () => {
       >
         <ChveronUp width={24} height={24} />
       </ToTheTop>
-      <FeaturedContainer>
-        <FeaturedContent>
-          <Flex column alignItems="center" gap={14}>
-            <Text weight="700" as="h1" size="h1" color="white">
-              My Store
-            </Text>
-            <Tick />
-          </Flex>
-          <Text color="grey" center>
-            Unlock a world of knowledge with our vast collection of e-books, and
-            embark on a reading journey like never before!
-          </Text>
-        </FeaturedContent>
-      </FeaturedContainer>
+      <ShopHeader />
       <BooksSection>
         <ContentBox>
           <Flex justifyContent="center" gap={48}>

@@ -12,7 +12,11 @@ const initialState: BookReducer = {
 const bookSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    resetSingleBook(state) {
+      state.singleBook = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getSingleBook.fulfilled, (state, action) => {
       state.singleBook = action.payload;
@@ -36,5 +40,7 @@ const bookSlice = createSlice({
     });
   },
 });
+
+export const { resetSingleBook } = bookSlice.actions;
 
 export default bookSlice.reducer;

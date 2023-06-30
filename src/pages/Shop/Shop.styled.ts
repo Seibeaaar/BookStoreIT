@@ -2,27 +2,6 @@ import styled from 'styled-components';
 import Text from 'src/components/ui/Text';
 import Flex from 'src/components/ui/Flex';
 
-export const FeaturedContainer = styled.section`
-  background-color: ${(props) => props.theme.colors.primary};
-  padding: 60px 0 120px 0;
-  height: 50vh;
-  @media screen and (max-width: 992px) {
-    height: auto;
-  }
-`;
-
-export const FeaturedContent = styled.div`
-  max-width: 630px;
-  margin: auto;
-`;
-
-export const Tick = styled.div`
-  width: 34px;
-  height: 2px;
-  background-color: ${(props) => props.theme.colors.secondary};
-  margin-bottom: 28px;
-`;
-
 export const BooksSection = styled.section`
   padding: 150px 0;
   @media screen and (max-width: 768px) {

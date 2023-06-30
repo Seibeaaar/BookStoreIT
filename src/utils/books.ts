@@ -4,3 +4,8 @@ export const calculateBookTotal = (price: string, quantity: number) => {
 };
 
 export const formatPriceString = (price: number) => `$${price}`;
+
+export const formatBookDescription = (desc: string) => {
+  const sentences = desc.split('.').filter(Boolean);
+  return sentences.slice(0, sentences.length - 1).join('.') + '.';
+};

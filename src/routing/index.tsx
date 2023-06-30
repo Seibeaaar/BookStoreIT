@@ -4,6 +4,7 @@ import HomePage from 'src/pages/Home';
 import Footer from 'src/components/Footer';
 import NotFoundPage from 'src/pages/404';
 import ShopPage from 'src/pages/Shop';
+import BookPage from 'src/pages/Book';
 import { useEffect } from 'react';
 
 const Layout = () => {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         element: <div>Contact Us</div>,
         path: '/contact',
+      },
+      {
+        element: <BookPage />,
+        path: '/books/:id',
       },
       {
         element: <NotFoundPage />,

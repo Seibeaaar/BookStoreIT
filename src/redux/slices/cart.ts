@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { CartReducer } from 'src/types/redux';
 import { CartItem } from 'src/types/cart';
 import { calculateBookTotal } from 'src/utils/books';
@@ -14,29 +14,30 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem(state, action) {
+    addToCart(state, action) {
       state.items.push(action.payload);
+      console.log('push');
       const {
         book: { price },
         quantity,
       } = action.payload;
       state.total += calculateBookTotal(price, quantity);
     },
-    removeItem(state, action) {
-      const {
-        book: { price, isbn13: removedIsbn },
-        quantity,
-      } = state.items.find(
+    removeFromCart(state, action) {
+      const currentState = current(state);
+      const removedItem = currentState.items.find(
         (item) => item.book.isbn13 === action.payload
       ) as CartItem;
-      state.total -= calculateBookTotal(price, quantity);
-      state.items = state.items.filter(
-        (item) => item.book.isbn13 !== removedIsbn
-      );
+      const { book, quantity } = removedItem;
+      state.total -= calculateBookTotal(book.price, quantity);
+      const newCartState = currentState.items.filter((item) => {
+        return item.book.isbn13 !== book.isbn13;
+      });
+      state.items = newCartState;
     },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

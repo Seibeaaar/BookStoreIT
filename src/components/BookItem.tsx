@@ -4,6 +4,7 @@ import Text from './ui/Text';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
 import { BookPreview } from 'src/types/books';
 import Button from './ui/Button';
+import { useNavigate } from 'react-router-dom';
 
 interface IBookItemProps {
   book: BookPreview;
@@ -34,6 +35,10 @@ const BookImage = styled.img`
 
 const BookItem: React.FC<IBookItemProps> = ({ book }) => {
   const { small } = useWindowDimensions();
+  const navigate = useNavigate();
+
+  const navigateToBookPage = () => navigate(`/books/${book.isbn13}`);
+
   return (
     <BookItemContainer key={book.isbn13} alignItems="center">
       <BookImage loading="lazy" src={book.image} alt={book.title} />
@@ -44,7 +49,12 @@ const BookItem: React.FC<IBookItemProps> = ({ book }) => {
         <BookDescription center={small} color="grey" weight="300">
           {book.subtitle || 'No description provided'}
         </BookDescription>
-        <Button width={150} text="Read more" background={false} />
+        <Button
+          onClick={navigateToBookPage}
+          width={150}
+          text="Read more"
+          background={false}
+        />
       </Flex>
     </BookItemContainer>
   );

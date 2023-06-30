@@ -6,7 +6,7 @@ import { Color } from 'src/types/ui';
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   background?: boolean;
   text: string;
-  width?: number;
+  width?: number | string;
   textColor?: Color;
   hoverTextColor?: Color;
 }
@@ -14,6 +14,7 @@ interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 const ButtonTemplate = styled.button<IButtonProps>`
   cursor: pointer;
   padding: 10px 0;
+  height: 50px;
   border: 1px solid ${(props) => props.theme.colors.secondary};
   outline: none;
   transition: all 0.25s ease;

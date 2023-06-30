@@ -7,6 +7,7 @@ import ContentBox from 'src/components/ui/ContentBox';
 import Button from 'src/components/ui/Button';
 import { Tick } from '../components/Home.styled';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.section`
   background-color: ${(props) => props.theme.colors.primary};
@@ -54,6 +55,9 @@ const BookTitle = styled(Text)`
 const FeaturedItem = () => {
   const featuredBook = useSelector((state: AppStore) => state.books.feed[0]);
   const { medium, small } = useWindowDimensions();
+  const navigate = useNavigate();
+
+  const navigateToBookPage = () => navigate(`/books/${featuredBook.isbn13}`);
   return (
     <Container>
       <ContentBox>
@@ -83,7 +87,11 @@ const FeaturedItem = () => {
           justifyContent={medium ? 'center' : 'flex-start'}
           gap={40}
         >
-          <Button hoverTextColor="white" text="Add to your cart" />
+          <Button
+            onClick={navigateToBookPage}
+            hoverTextColor="white"
+            text="Add to your cart"
+          />
           <WebPageLink href={featuredBook.url} target="_blank">
             <Text family="Cardo" weight="400" color="white">
               Read more on website
