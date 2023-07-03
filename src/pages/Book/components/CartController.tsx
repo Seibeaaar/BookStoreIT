@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { notification } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,7 +6,6 @@ import { AppStore } from 'src/types/redux';
 import { AppDispatch } from 'src/redux/store';
 import Flex from 'src/components/ui/Flex';
 import Text from 'src/components/ui/Text';
-import { ReactComponent as CartIcon } from 'src/assets/icons/Cart.svg';
 import Button from 'src/components/ui/Button';
 import { addToCart, removeFromCart } from 'src/redux/slices/cart';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
@@ -31,10 +30,10 @@ const ControllerButton = styled.button`
 
 const CartController = () => {
   const { singleBook } = useSelector((state: AppStore) => state.books);
+  const { items } = useSelector((state: AppStore) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
   const [quantity, setQuantity] = useState<number>(1);
   const [api, contextHolder] = notification.useNotification();
-  const [inCart, setInCart] = useState<boolean>(false);
   const { extraLarge, small } = useWindowDimensions();
 
   const toggleBookInCart = () => {
@@ -53,8 +52,16 @@ const CartController = () => {
       placement: 'topRight',
     });
     setQuantity(1);
-    setInCart(!inCart);
   };
+
+  const inCart = useMemo(
+    () =>
+      !!items.find((cartItem) => {
+        const { book } = cartItem;
+        return singleBook?.isbn13 === book.isbn13;
+      }),
+    [items, singleBook]
+  );
 
   return (
     <Flex

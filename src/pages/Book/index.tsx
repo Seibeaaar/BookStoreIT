@@ -8,7 +8,6 @@ import { resetSingleBook } from 'src/redux/slices/books';
 
 import BookInfo from './components/BookInfo';
 import Benefits from './components/Benefits';
-import BookAppendix from './components/Appendix';
 
 const BookPage = () => {
   const { id } = useParams();
@@ -18,7 +17,7 @@ const BookPage = () => {
     return () => {
       dispatch(resetSingleBook());
     };
-  }, []);
+  }, [dispatch, id]);
   return (
     <main>
       <ShopHeader />

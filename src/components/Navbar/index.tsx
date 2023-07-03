@@ -1,6 +1,7 @@
 import Text from '../ui/Text';
 import Flex from '../ui/Flex';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ModalContext } from '../CartModal';
 import { useSelector } from 'react-redux';
 import { ReactComponent as CartIcon } from 'src/assets/icons/Cart.svg';
 import {
@@ -19,6 +20,7 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { large } = useWindowDimensions();
   const { items } = useSelector((state: AppStore) => state.cart);
+  const { openModal } = useContext(ModalContext);
 
   const closeNavbarDrawer = () => setNavbarOpen(false);
   const toggleNavbarDrawer = () => setNavbarOpen(!navbarOpen);
@@ -73,7 +75,7 @@ const Navbar = () => {
           </Text>
         </NavLink>
       ))}
-      <Cart>
+      <Cart onClick={openModal}>
         <CartIcon />
         {itemsCount ? (
           <CartLabel>

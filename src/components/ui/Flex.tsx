@@ -15,6 +15,7 @@ interface IFlexProps {
   justifyContent?: FlexAlignment;
   gap?: number;
   width?: string | number;
+  height?: string | number;
 }
 
 const Flex = styled.div<IFlexProps>`
@@ -32,6 +33,13 @@ const Flex = styled.div<IFlexProps>`
       return `${width}px`;
     }
     return width || 'auto';
+  }};
+  height: ${(props) => {
+    const { height } = props;
+    if (typeof height === 'number') {
+      return `${height}px`;
+    }
+    return height || 'auto';
   }};
 `;
 

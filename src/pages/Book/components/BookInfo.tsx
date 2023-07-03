@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import he from 'he';
 import { AppStore } from 'src/types/redux';
+import { Rate } from 'antd';
 
 import ContentBox from 'src/components/ui/ContentBox';
 import Flex from 'src/components/ui/Flex';
@@ -30,6 +31,10 @@ const BookImage = styled.img`
 
 const InfoLabel = styled(Text)`
   width: 120px;
+`;
+
+const RatingNumber = styled(Text)`
+  margin-top: 6px;
 `;
 
 const BookInfo = () => {
@@ -68,6 +73,7 @@ const BookInfo = () => {
       <ContentBox>
         <Flex
           column={extraLarge}
+          gap={48}
           alignItems="center"
           justifyContent="space-between"
         >
@@ -80,6 +86,12 @@ const BookInfo = () => {
               <Text color="secondary" size="h5" weight="700">
                 {singleBook?.price}
               </Text>
+              {singleBook?.rating ? (
+                <Flex alignItems="center" gap={24}>
+                  <Rate disabled value={+singleBook.rating} allowHalf />
+                  <RatingNumber>{(+singleBook.rating).toFixed(2)}</RatingNumber>
+                </Flex>
+              ) : null}
             </div>
             <Flex column gap={48}>
               {/* Sometimes server sends description with HTML special characters */}

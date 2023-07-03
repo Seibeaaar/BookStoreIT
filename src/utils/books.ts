@@ -3,7 +3,7 @@ export const calculateBookTotal = (price: string, quantity: number) => {
   return formattedPrice * quantity;
 };
 
-export const formatPriceString = (price: number) => `$${price}`;
+export const formatPriceString = (price: number) => `$${price.toFixed(2)}`;
 
 export const formatBookDescription = (desc: string) => {
   const sentences = desc.split('.').filter(Boolean);

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { AppStore } from 'src/types/redux';
 import Flex from 'src/components/ui/Flex';
-import Button from 'src/components/ui/Button';
 import Text from 'src/components/ui/Text';
 import ContentBox from 'src/components/ui/ContentBox';
 
