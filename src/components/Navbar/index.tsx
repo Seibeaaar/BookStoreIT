@@ -35,7 +35,7 @@ const Navbar = () => {
         gap={20}
         as="nav"
       >
-        <Cart>
+        <Cart onClick={openModal}>
           <CartIcon />
           {itemsCount ? (
             <CartLabel>

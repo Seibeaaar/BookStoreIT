@@ -22,6 +22,7 @@ import {
   BookMeta,
   EmptyCartImage,
 } from './CartModal.styled';
+import useWindowDimensions from 'src/hooks/useWindowDimensions';
 
 interface ICartModalProps {
   children: React.ReactNode;
@@ -36,6 +37,7 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const { items, total } = useSelector((state: AppStore) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
+  const { extraLarge, medium } = useWindowDimensions();
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -64,11 +66,14 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
               </Text>
               <ModalCloseIcon onClick={closeModal} width={20} height={20} />
             </ModalHeader>
-            <Flex height="100%">
+            <Flex
+              height={extraLarge ? 'calc(100% - 80px)' : '100%'}
+              column={extraLarge}
+            >
               <CartItemsSection
                 justifyContent="space-between"
                 alignItems="center"
-                width="65%"
+                width={extraLarge ? '100%' : '65%'}
                 gap={24}
                 column
               >
@@ -94,7 +99,9 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
                               <Text family="Cardo" weight="300">
                                 {item.book.title}
                               </Text>
-                              <Text color="grey">{item.book.price}</Text>
+                              <Text color="grey">{`${item.book.price}${
+                                medium ? ' x ' + item.quantity : ''
+                              }`}</Text>
                             </BookMeta>
                             <RemoveButton
                               onClick={() =>
@@ -107,9 +114,11 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
                             </RemoveButton>
                           </Flex>
                         </Flex>
-                        <QuantityLabel justifyContent="center">
-                          <Text>{item.quantity}</Text>
-                        </QuantityLabel>
+                        {medium ? null : (
+                          <QuantityLabel justifyContent="center">
+                            <Text>{item.quantity}</Text>
+                          </QuantityLabel>
+                        )}
                       </Flex>
                     ))}
                   </>
@@ -125,7 +134,11 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
                   </div>
                 )}
               </CartItemsSection>
-              <CheckoutContainer width="35%" column gap={48}>
+              <CheckoutContainer
+                width={extraLarge ? '100%' : '35%'}
+                column
+                gap={medium ? 24 : 48}
+              >
                 <Flex
                   width="100%"
                   alignItems="center"

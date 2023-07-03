@@ -23,10 +23,11 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalHeader = styled(Flex)`
-  padding: 24px 48px;
+  padding: 24px;
   position: sticky;
   top: 0;
   background-color: ${(props) => props.theme.colors.secondary};
+  height: 80px;
 `;
 
 export const RemoveButton = styled.button`
@@ -48,6 +49,9 @@ export const CartItemsSection = styled(Flex)`
   padding: 48px;
   overflow: auto;
   height: calc(100% - 48px);
+  @media screen and (max-width: 768px) {
+    padding: 24px;
+  }
 `;
 
 export const ModalCloseIcon = styled(CrossIcon)`
@@ -59,9 +63,14 @@ export const ModalCloseIcon = styled(CrossIcon)`
 `;
 
 export const CheckoutContainer = styled(Flex)`
-  padding: 24px 48px 0;
+  padding: 24px 48px;
   border-left: 1px solid ${(props) => props.theme.colors.grey};
   height: 100%;
+  @media screen and (max-width: 1200px) {
+    height: auto;
+    border-left: none;
+    border-top: 1px solid ${(props) => props.theme.colors.grey};
+  }
 `;
 
 export const QuantityLabel = styled(Flex)`
