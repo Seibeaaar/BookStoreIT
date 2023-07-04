@@ -14,10 +14,10 @@ const NotFoundPage = () => {
       <Flex column alignItems="center">
         <NotFoundIcon />
         <Content>
-          <Text as="h1" size="h1" weight="700">
+          <Text center as="h1" size="h1" weight="700">
             Page not found
           </Text>
-          <NotFoundInfo color="grey" weight="300" family="Inter">
+          <NotFoundInfo center color="grey" weight="300" family="Inter">
             The page you are looking for doesn't exist. Please try searching for
             some other page, or return to the website's homepage to find what
             you're looking for.

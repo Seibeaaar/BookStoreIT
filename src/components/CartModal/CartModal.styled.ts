@@ -66,6 +66,7 @@ export const CheckoutContainer = styled(Flex)`
   padding: 24px 48px;
   border-left: 1px solid ${(props) => props.theme.colors.grey};
   height: 100%;
+  overflow: auto;
   @media screen and (max-width: 1200px) {
     height: auto;
     border-left: none;

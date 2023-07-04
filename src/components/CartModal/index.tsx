@@ -1,11 +1,11 @@
 import React, { createContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { PayPalButtons } from '@paypal/react-paypal-js';
 import { notification } from 'antd';
 import { AppStore } from 'src/types/redux';
-import { removeFromCart } from 'src/redux/slices/cart';
+import { clearCart, removeFromCart } from 'src/redux/slices/cart';
 import { AppDispatch } from 'src/redux/store';
 import { formatPriceString } from 'src/utils/books';
-import Button from '../ui/Button';
 import Flex from '../ui/Flex';
 import Text from '../ui/Text';
 import EmptyCart from 'src/assets/images/empty-cart.webp';
@@ -47,6 +47,28 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
     dispatch(removeFromCart(id));
     api.success({
       message: 'Book removed from your cart',
+    });
+  };
+
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: total.toFixed(2),
+          },
+        },
+      ],
+    });
+  };
+
+  const onOrderApprove = (data, actions) => {
+    return actions.order.capture().then(() => {
+      api.success({
+        message: `Transaction completed successfully.`,
+      });
+      closeModal();
+      dispatch(clearCart());
     });
   };
 
@@ -150,7 +172,15 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
                   <Text weight="700">{formatPriceString(total)}</Text>
                 </Flex>
                 {items.length ? (
-                  <Button width="100%" text="Continue to checkout" />
+                  <Flex width="100%" justifyContent="center">
+                    <PayPalButtons
+                      style={{
+                        layout: 'vertical',
+                      }}
+                      createOrder={createOrder}
+                      onApprove={onOrderApprove}
+                    />
+                  </Flex>
                 ) : null}
               </CheckoutContainer>
             </Flex>
