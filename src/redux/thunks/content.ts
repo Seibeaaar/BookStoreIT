@@ -4,7 +4,7 @@ import { HomeContent, Article } from 'src/types/firebase';
 
 export const getHomeContent = createAsyncThunk(
   'content/home',
-  async ({}, { rejectWithValue }) => {
+  async (_payload, { rejectWithValue }) => {
     try {
       const content =
         (await FirebaseAPI.getHomeContent()) as unknown as HomeContent;
@@ -17,7 +17,7 @@ export const getHomeContent = createAsyncThunk(
 
 export const getArticles = createAsyncThunk(
   'content/articles',
-  async ({}, { rejectWithValue }) => {
+  async (_payload, { rejectWithValue }) => {
     try {
       const articles =
         (await FirebaseAPI.getArticles()) as unknown as Article[];
