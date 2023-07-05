@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ThemeProvider } from 'styled-components';
+import theme from './ui/theme';
+import { RouterProvider } from 'react-router-dom';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { Provider } from 'react-redux';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import CartModal from './components/CartModal';
+import router from './routing';
 
-function App() {
-  const [count, setCount] = useState(0)
+const initialOptions = {
+  clientId: 'test',
+  currency: 'USD',
+  intent: 'capture',
+};
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <PayPalScriptProvider options={initialOptions}>
+        <ThemeProvider theme={theme}>
+          <CartModal>
+            <RouterProvider router={router} />
+          </CartModal>
+        </ThemeProvider>
+      </PayPalScriptProvider>
+    </PersistGate>
+  </Provider>
+);
 
-export default App
+export default App;
