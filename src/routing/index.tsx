@@ -7,6 +7,7 @@ import ShopPage from 'src/pages/Shop';
 import BookPage from 'src/pages/Book';
 import BlogPage from 'src/pages/Blog';
 import { useEffect } from 'react';
+import ArticlePage from 'src/pages/Article';
 
 const Layout = () => {
   const location = useLocation();
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         element: <BookPage />,
         path: '/books/:id',
+      },
+      {
+        path: '/blog/:name',
+        element: <ArticlePage />,
       },
       {
         element: <NotFoundPage />,

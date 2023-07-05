@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import moment from 'moment';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Article } from 'src/types/firebase';
 import Flex from 'src/components/ui/Flex';
 import Text from 'src/components/ui/Text';
@@ -26,19 +26,12 @@ const ItemInfo = styled(Text)`
   margin: 14px 0 27px 0;
 `;
 
-const ReadMore = styled(NavLink)`
-  outline: none;
-  text-decoration: none;
-  transition: border-bottom-color 0.25s ease;
+const ReadMore = styled(Text)`
+  transition: all 0.25s ease;
   border-bottom: 2px solid ${(props) => props.theme.colors.primary};
-  p {
-    transition: color 0.25s ease;
-  }
   &:hover {
     border-bottom-color: ${(props) => props.theme.colors.secondary};
-    p {
-      color: ${(props) => props.theme.colors.secondary};
-    }
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
@@ -48,6 +41,12 @@ interface IArticleItemProps {
 
 const ArticleItem: React.FC<IArticleItemProps> = ({ article }) => {
   const publishedDate = new Date(article.createdAt.seconds * 1000);
+  const navigate = useNavigate();
+
+  const navigateToArticle = () =>
+    navigate(`/blog/${article.title}`, {
+      state: article,
+    });
   return (
     <Container>
       <ArticleImage src={article.image} alt="Article image" />
@@ -57,10 +56,8 @@ const ArticleItem: React.FC<IArticleItemProps> = ({ article }) => {
         </Text>
         <ItemInfo color="grey">{article.thumbTetx}</ItemInfo>
         <Flex alignItems="center" justifyContent="space-between">
-          <ReadMore to="/">
-            <Text weight="700" family="Cardo">
-              Read More
-            </Text>
+          <ReadMore weight="700" family="Cardo" onClick={navigateToArticle}>
+            Read More
           </ReadMore>
           <Text>{moment(publishedDate).format('DD.MM.YYYY')}</Text>
         </Flex>
