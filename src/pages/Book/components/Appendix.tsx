@@ -6,7 +6,7 @@ import Text from 'src/components/ui/Text';
 import ContentBox from 'src/components/ui/ContentBox';
 
 const AppendixContainer = styled.section`
-  margin-top: 24px;
+  margin-top: 48px;
 `;
 
 const WebsiteLink = styled.a`

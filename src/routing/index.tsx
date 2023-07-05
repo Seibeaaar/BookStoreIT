@@ -5,6 +5,7 @@ import Footer from 'src/components/Footer';
 import NotFoundPage from 'src/pages/404';
 import ShopPage from 'src/pages/Shop';
 import BookPage from 'src/pages/Book';
+import BlogPage from 'src/pages/Blog';
 import { useEffect } from 'react';
 
 const Layout = () => {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
         path: '/shop',
       },
       {
-        element: <div>About</div>,
+        element: <BlogPage />,
         path: '/blog',
       },
       {

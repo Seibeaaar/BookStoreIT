@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCSH5lwObrjs5ahocWkSrYXC6GO1OnN1Gg',
@@ -15,12 +16,33 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
+const storage = getStorage(app);
+
 const getHomeContent = async () => {
   const homeContentCollection = collection(db, 'homeContent');
   const collectionSnapshot = await getDocs(homeContentCollection);
   return collectionSnapshot.docs[0].data();
 };
 
+const getArticles = async () => {
+  const articlesCollection = collection(db, 'articles');
+  const collectionSnapshot = await getDocs(articlesCollection);
+  const processedArticles = await Promise.all(
+    collectionSnapshot.docs.map(async (doc) => {
+      const docData = doc.data();
+      const articleImageRef = ref(storage, docData.image);
+      const imageUrl = await getDownloadURL(articleImageRef);
+      return {
+        id: doc.id,
+        ...docData,
+        image: imageUrl,
+      };
+    })
+  );
+  return processedArticles;
+};
+
 export default {
   getHomeContent,
+  getArticles,
 };

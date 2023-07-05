@@ -6,8 +6,9 @@ import { BooksSection, CategorySelector, ToTheTop } from './Shop.styled';
 import useWindowDimensions from 'src/hooks/useWindowDimensions';
 import { ReactComponent as ChveronUp } from 'src/assets/icons/ChevronUp.svg';
 import NewTab from './components/NewTab';
+import { SHOP_HEADER_CONTENT } from 'src/constants/headers';
 import SearchTab from './components/SearchTab';
-import ShopHeader from 'src/components/ShopHeader';
+import PageHeader from 'src/components/PageHeader';
 
 type StoreCategory = 'new' | 'search';
 
@@ -55,7 +56,7 @@ const ShopPage = () => {
       >
         <ChveronUp width={24} height={24} />
       </ToTheTop>
-      <ShopHeader />
+      <PageHeader {...SHOP_HEADER_CONTENT} />
       <BooksSection>
         <ContentBox>
           <Flex justifyContent="center" gap={48}>

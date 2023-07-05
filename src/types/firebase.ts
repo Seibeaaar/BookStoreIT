@@ -8,3 +8,15 @@ export interface HomeContent {
   learnBullets: string[];
   partners: Partner[];
 }
+
+export interface Article {
+  title: string;
+  content: string;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  image: string;
+  thumbTetx: string;
+  id: string;
+}

@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux';
-import ShopHeader from 'src/components/ShopHeader';
+import PageHeader from 'src/components/PageHeader';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { AppDispatch } from 'src/redux/store';
 import { getSingleBook } from 'src/redux/thunks/books';
 import { resetSingleBook } from 'src/redux/slices/books';
+import { SHOP_HEADER_CONTENT } from 'src/constants/headers';
 
 import BookInfo from './components/BookInfo';
 import Benefits from './components/Benefits';
@@ -20,7 +21,7 @@ const BookPage = () => {
   }, [dispatch, id]);
   return (
     <main>
-      <ShopHeader />
+      <PageHeader {...SHOP_HEADER_CONTENT} />
       <BookInfo />
       <Benefits />
     </main>

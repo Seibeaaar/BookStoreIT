@@ -23,21 +23,25 @@ const Tick = styled.div`
   margin-bottom: 28px;
 `;
 
-const ShopHeader = () => (
+interface IPageHeaderProps {
+  title: string;
+  description: string;
+}
+
+const PageHeader: React.FC<IPageHeaderProps> = ({ title, description }) => (
   <FeaturedContainer>
     <FeaturedContent>
       <Flex column alignItems="center" gap={14}>
         <Text weight="700" as="h1" size="h1" color="white">
-          My Store
+          {title}
         </Text>
         <Tick />
       </Flex>
       <Text color="grey" center>
-        Unlock a world of knowledge with our vast collection of e-books, and
-        embark on a reading journey like never before!
+        {description}
       </Text>
     </FeaturedContent>
   </FeaturedContainer>
 );
 
-export default ShopHeader;
+export default PageHeader;
