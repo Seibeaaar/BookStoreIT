@@ -47,10 +47,6 @@ const router = createBrowserRouter([
         path: '/blog',
       },
       {
-        element: <div>Contact Us</div>,
-        path: '/contact',
-      },
-      {
         element: <BookPage />,
         path: '/books/:id',
       },

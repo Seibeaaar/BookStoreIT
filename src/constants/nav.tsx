@@ -35,8 +35,4 @@ export const NAV_LINKS = [
     path: '/blog',
     name: 'Blog',
   },
-  {
-    path: '/contact',
-    name: 'Contact',
-  },
 ];
