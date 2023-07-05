@@ -7,7 +7,7 @@ import useWindowDimensions from 'src/hooks/useWindowDimensions';
 
 const ArticlePage = () => {
   const { state: article } = useLocation();
-  const { small, medium } = useWindowDimensions();
+  const { medium } = useWindowDimensions();
   return (
     <main>
       {medium ? null : <PageHeader title={article.title} />}

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { searchBooksByKeyword } from '../thunks/books';
 import { SearchReducer } from 'src/types/redux';
+import { BookPreview } from 'src/types/books';
 
 const initialState: SearchReducer = {
   error: null,
@@ -31,7 +32,10 @@ const searchSlice = createSlice({
       state.pending = true;
     });
     builder.addCase(searchBooksByKeyword.fulfilled, (state, action) => {
-      const { books, total } = action.payload;
+      const { books, total } = action.payload as {
+        books: BookPreview[];
+        total: string;
+      };
       state.items = books;
       state.totalResults = +total;
       state.pending = false;
