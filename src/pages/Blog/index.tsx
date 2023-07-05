@@ -8,7 +8,7 @@ import { BLOG_HEADER_CONTENT } from 'src/constants/headers';
 
 import ContentBox from 'src/components/ui/ContentBox';
 import ArticleItem from './components/ArticleItem';
-import { BlogContainer } from './Blog.styled';
+import { ArticleWrapper, BlogContainer } from './Blog.styled';
 
 const BlogPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,9 +21,11 @@ const BlogPage = () => {
       <PageHeader {...BLOG_HEADER_CONTENT} />
       <BlogContainer>
         <ContentBox>
-          {articles.map((article) => (
-            <ArticleItem article={article} key={article.id} />
-          ))}
+          <ArticleWrapper gap={34} alignItems="center">
+            {articles.map((article) => (
+              <ArticleItem article={article} key={article.id} />
+            ))}
+          </ArticleWrapper>
         </ContentBox>
       </BlogContainer>
     </main>

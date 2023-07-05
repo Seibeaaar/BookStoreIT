@@ -1,4 +1,5 @@
 import { createBrowserRouter, Outlet, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import Header from 'src/components/Header';
 import HomePage from 'src/pages/Home';
 import Footer from 'src/components/Footer';
@@ -8,6 +9,12 @@ import BookPage from 'src/pages/Book';
 import BlogPage from 'src/pages/Blog';
 import { useEffect } from 'react';
 import ArticlePage from 'src/pages/Article';
+
+const MainOutlet = styled.main`
+  @media screen and (max-width: 768px) {
+    margin-top: 10vh;
+  }
+`;
 
 const Layout = () => {
   const location = useLocation();

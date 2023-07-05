@@ -27,7 +27,7 @@ const AboutInfo = styled.article`
 `;
 
 const AboutShop = () => {
-  const { medium } = useWindowDimensions();
+  const { medium, small } = useWindowDimensions();
   return (
     <Container>
       <ContentBox>
@@ -46,7 +46,7 @@ const AboutShop = () => {
               </Text>
               <Tick />
             </Flex>
-            <AboutText color="grey" weight="300">
+            <AboutText center={small} color="grey" weight="300">
               Welcome to our online book shop! We are dedicated to bringing you
               a wide selection of books across genres. With our user-friendly
               platform, we aim to provide an enjoyable and convenient shopping

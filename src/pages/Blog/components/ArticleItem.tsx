@@ -9,6 +9,12 @@ const Container = styled.article`
   width: calc(33% - 34px);
   margin-bottom: 50px;
   box-shadow: 0px 35px 25px 0px rgba(4, 11, 20, 0.04);
+  @media screen and (max-width: 1200px) {
+    width: calc(50% - 34px);
+  }
+  @media screen and (max-width: 992px) {
+    width: 100%;
+  }
 `;
 
 const ArticleMeta = styled.div`

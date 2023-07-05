@@ -11,6 +11,11 @@ const HeaderContainer = styled(Flex)`
   height: 15vh;
   @media screen and (max-width: 768px) {
     height: 10vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
   }
 `;
 
