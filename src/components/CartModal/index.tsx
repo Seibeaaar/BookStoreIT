@@ -50,28 +50,6 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
     });
   };
 
-  const createOrder = (data, actions) => {
-    return actions.order.create({
-      purchase_units: [
-        {
-          amount: {
-            value: total.toFixed(2),
-          },
-        },
-      ],
-    });
-  };
-
-  const onOrderApprove = (data, actions) => {
-    return actions.order.capture().then(() => {
-      api.success({
-        message: `Transaction completed successfully.`,
-      });
-      closeModal();
-      dispatch(clearCart());
-    });
-  };
-
   return (
     <ModalContext.Provider
       value={{
@@ -177,8 +155,26 @@ const CartModal: React.FC<ICartModalProps> = ({ children }) => {
                       style={{
                         layout: 'vertical',
                       }}
-                      createOrder={createOrder}
-                      onApprove={onOrderApprove}
+                      createOrder={({}, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: total.toFixed(2),
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={({}, actions) => {
+                        return actions.order!.capture().then(() => {
+                          api.success({
+                            message: `Transaction completed successfully.`,
+                          });
+                          closeModal();
+                          dispatch(clearCart());
+                        });
+                      }}
                     />
                   </Flex>
                 ) : null}

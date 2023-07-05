@@ -16,7 +16,7 @@ export const getSingleBook = createAsyncThunk(
 
 export const getNewBooks = createAsyncThunk(
   'books/new',
-  async (payload, { rejectWithValue }) => {
+  async ({}, { rejectWithValue }) => {
     try {
       const books = await BooksAPI.getNewBooks();
       return books;
